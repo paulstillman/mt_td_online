@@ -96,6 +96,9 @@ var jsPsychHtmlButtonResponsePES = (function (jspsych) {
             if (trial.mouseout_message !== null) {
                 html += '<div class="mousemove-warning-msg" id="mouseslow_message">' + trial.slowmouse_message + "</div>";
             } 
+            
+            // below works, but doesn't clear after each trial (kind of what we wan)
+            html += '<div style = "position:absolute; left: 0px; top: 600px">' + 'test_test' + "</div>";
 
             // display stimulus
             html += '<div id="jspsych-html-button-response-stimulus">' + trial.stimulus + "</div>";
@@ -137,7 +140,7 @@ var jsPsychHtmlButtonResponsePES = (function (jspsych) {
             //show prompt if there is one
             if (trial.prompt !== null) {
                 html += trial.prompt;
-                '<div class="mouseout-warning-msg" id="left_response_label" style = "position:absolute; left: 0px; top: 150px">' + trial.prompt + '</div>'
+                '<div style = "position:absolute; left: 0px; top: 150px">' + trial.prompt + '</div>'
                 console.log(trial.prompt)
             }
 
