@@ -137,6 +137,8 @@ var jsPsychHtmlButtonResponsePES = (function (jspsych) {
             //show prompt if there is one
             if (trial.prompt !== null) {
                 html += trial.prompt;
+                '<div class="mouseout-warning-msg" id="left_response_label" style = "position:absolute; left: 0px; top: 150px">' + trial.prompt + '</div>'
+                console.log(trial.prompt)
             }
 
             // add warning messages if using:

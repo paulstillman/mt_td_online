@@ -19,29 +19,9 @@ const fname = `${sub_id}.csv`;
 console.log(fname)
 let timeline = [];
 
-var preload = {
-  type: jsPsychPreload,
-  images: ['./img/Wall-e.png', 
-  './img/Taylor.png',
-  './img/Spongebob.png',
-  './img/Sandy.png',
-  './img/R2D2.png',
-  './img/Mickey.png',
-  './img/luigi.png',
-  './img/Lisa.png',
-  './img/C3P-0.png',
-  './img/Bugs.png',
-  './img/Baxter_nf.png',
-  './img/Bart.png'
-]
-};
 
-
-
-timeline.push(preload)
-
-var competent_right = Math.floor(Math.random()*2);
-let choices_competent;
+var LL_right = Math.floor(Math.random()*2);
+/*let choices_competent;
 let choices_knowledgeable;
 let choices_capable;
 let choices_reliable;
@@ -56,8 +36,10 @@ if (competent_right === 1) {
   choices_capable = ['Mostly<br>Capable', 'Mostly<br>Incapable'];
   choices_reliable = ['Mostly<br>Reliable', 'Mostly<br>Unreliable'];
 }
+*/
 
 
+/* UNCOMMENT THIS BEFORE EXPERIMENT
 var enter_fullscreen = {
   type: jsPsychFullscreen,
   fullscreen_mode: true,
@@ -65,6 +47,8 @@ var enter_fullscreen = {
 }
 
 timeline.push(enter_fullscreen)
+/*
+
 /*
 const target_list = [
   {stimulus: 'Wall-e'},
@@ -98,15 +82,18 @@ const target_list = [
 const mt_trial_competent = {
   type: jsPsychHtmlButtonResponsePES,
   // stimulus: '<img src="./img/' + jsPsych.timelineVariable('stimulus') + '.png">',
-  stimulus: jsPsych.timelineVariable('stimulus'),
-  choices: choices_competent,
+  // stimulus: jsPsych.timelineVariable('stimulus'),
+  stimulus: 'Choose',
+  //choices: choices_competent,
+  choices: ['test1', 'test2'],
   adjust_aspect_ratio: 0,
+  prompt: ['LL', 'SS'],
   button_html: ['<button class="jspsych-btn mt-response-btn" id="left_response" style = "position:absolute; left: 0px; top: 0px">%choice%</button>', '<button class="jspsych-btn mt-response-btn" id="right_response" style = "position:absolute; right:0px; top: 0px">%choice%</button>'],
-  slowmouse_message: `Please begin moving your mouse<br>as soon as the image appears`,
+  slowmouse_message: `Please begin moving your mouse<br>as soon as the options appear`,
   mouseout_message: `Please keep your mouse<br>in the browser window`,
   data: {
-    task: 'MT',
-    competent_right: competent_right
+    task: 'MT'
+    //competent_right: competent_right
   },
   extensions: [
     { type: jsPsychExtensionMouseTracking }
@@ -126,7 +113,7 @@ const start_screen = {
 
 var test_procedure = {
   timeline: [start_screen, mt_trial_competent],
-  timeline_variables: target_list
+  timeline_variables: all_stim
 }
 
 timeline.push(test_procedure)
