@@ -24,11 +24,19 @@ var jsPsychHtmlButtonResponsePES = (function (jspsych) {
                 default: '<button class="jspsych-btn">%choice%</button>',
                 array: true,
             },
-            /** Any content here will be displayed under the button(s). */
-            prompt: {
+            /** Any content here will be displayed under the buttons. */
+            prompts: {
                 type: jspsych.ParameterType.HTML_STRING,
                 pretty_name: "Prompt",
                 default: null,
+                array: true
+            },
+            /** html for the prompts */
+            prompt_html: {
+                type: jspsych.ParameterType.HTML_STRING,
+                pretty_name: "Prompt HTML",
+                default: '<div class="mt-response-label">%prompt%</div>',
+                array: true
             },
             /** How long to show the stimulus. */
             stimulus_duration: {
@@ -98,7 +106,7 @@ var jsPsychHtmlButtonResponsePES = (function (jspsych) {
             } 
             
             // below works, but doesn't clear after each trial (kind of what we wan)
-            html += '<div style = "position:absolute; left: 0px; top: 600px">' + 'test_test' + "</div>";
+            // html += '<div class="mt-response-label" style = "position:absolute; left: 0px; top: 350px">' + 'test_test' + "</div>";
 
             // display stimulus
             html += '<div id="jspsych-html-button-response-stimulus">' + trial.stimulus + "</div>";
@@ -117,9 +125,10 @@ var jsPsychHtmlButtonResponsePES = (function (jspsych) {
                     buttons.push(trial.button_html);
                 }
             }
+            console.log(buttons)
             html += '<div id="jspsych-html-button-response-btngroup">';
-
-
+            // note how the div isn't closed until below. We could put the labels in the same div potentially
+            // but for now not gonna do that
 
             for (var i = 0; i < trial.choices.length; i++) {
                 var str = buttons[i].replace(/%choice%/g, trial.choices[i]);
@@ -137,12 +146,52 @@ var jsPsychHtmlButtonResponsePES = (function (jspsych) {
                     "</div>";
             }
             html += "</div>";
+
+            if (trial.prompts !== null) {
+                var prompts_disp = [];
+                if (Array.isArray(trial.prompt_html)) {
+                    if (trial.prompt_html.length == trial.prompts.length) {
+                        prompts_disp = trial.prompt_html;
+                    }
+                    else {
+                        console.error("Error in html-prompt-response plugin. The length of the prompt_html array does not equal the length of the prompts array");
+                    }
+                }
+                else {
+                    for (var i = 0; i < trial.prompts.length; i++) {
+                        prompts_disp.push(trial.prompt_html);
+                    }
+                }
+                html += '<div id="jspsych-html-prompt-response-group">';
+                /** 
+                for (var i = 0; i < trial.prompts.length; i++) {
+                    var str = prompts_disp[i].replace(/%prompt%/g, trial.prompts[i]);
+                    html +=
+                        '<div class="mt-response-label" style="display: inline-block;' +
+                        ' id="mt-response-label-' +
+                        i +
+                        '" data-choice="' +
+                        i +
+                        '">' +
+                        str +
+                        "</div>";
+                }
+                html += "</div>"; */
+                for (var i = 0; i < trial.prompts.length; i++) {
+                    var str = prompts_disp[i].replace(/%prompt%/g, trial.prompts[i]);
+                    html += str;
+                }
+                html += '</div>';
+            }
+
+            
             //show prompt if there is one
+            /** 
             if (trial.prompt !== null) {
                 html += trial.prompt;
                 '<div style = "position:absolute; left: 0px; top: 150px">' + trial.prompt + '</div>'
                 console.log(trial.prompt)
-            }
+            } */
 
             // add warning messages if using:
             

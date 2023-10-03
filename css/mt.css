@@ -518,6 +518,15 @@ input[type="radio"]:checked + .label:after {
   height:200px;
 }
 
+.mt-response-label {
+    font-size: 28px;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    position:absolute;
+    text-align: center;
+    width: 400px
+}
+
 .mouseout-warning-msg {
   font-size: 28px;
   font-weight: 400;

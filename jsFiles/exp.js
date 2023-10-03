@@ -85,10 +85,11 @@ const mt_trial_competent = {
   // stimulus: jsPsych.timelineVariable('stimulus'),
   stimulus: 'Choose',
   //choices: choices_competent,
-  choices: ['test1', 'test2'],
+  choices: [jsPsych.timelineVariable('mag_ll'), jsPsych.timelineVariable('mag_ss')],
   adjust_aspect_ratio: 0,
-  prompt: ['LL', 'SS'],
   button_html: ['<button class="jspsych-btn mt-response-btn" id="left_response" style = "position:absolute; left: 0px; top: 0px">%choice%</button>', '<button class="jspsych-btn mt-response-btn" id="right_response" style = "position:absolute; right:0px; top: 0px">%choice%</button>'],
+  prompts: ['180<br>Days', 'Today'],
+  prompt_html: ['<div class="mt-response-label" id="left_response_prompt" style = "position:absolute; left: 0px; top: 200px; text-align: center">%prompt%</div>', '<div class="mt-response-label" id="right_response_prompt" style = "position:absolute; right: 0px; top: 200px">%prompt%</div>'],
   slowmouse_message: `Please begin moving your mouse<br>as soon as the options appear`,
   mouseout_message: `Please keep your mouse<br>in the browser window`,
   data: {
